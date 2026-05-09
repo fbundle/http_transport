@@ -1,5 +1,5 @@
 function httpTransportJsName(method, path) {
-    return method + "$" + path.replace(/\//g, "$");
+    return method + "$" + path.replaceAll("/", "$");
 }
 
 export async function httpPost(path, data, cb) {
