@@ -1,0 +1,19 @@
+# binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.wasm
+
+# test binaries
+*.test
+
+# coverage
+*.out
+
+# dependency cache
+vendor/
+
+# build output
+dist/

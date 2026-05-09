@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <title>http_transport example</title>
+    <script src="./wasm_exec.js"></script>
+    <script>
+        const go = new Go();
+        WebAssembly.instantiateStreaming(fetch("app.wasm"), go.importObject)
+            .then(r => go.run(r.instance))
+            .catch(() => {}); // silently ignored in remote mode (no app.wasm served)
+    </script>
+</head>
+<body>
+    <h2>echo</h2>
+    <textarea id="input" rows="4" cols="40">{"hello": "world"}</textarea>
+    <br>
+    <button id="send">Send</button>
+    <pre id="output"></pre>
+
+    <script type="module">
+        import {httpPost} from "./http_transport.js";
+
+        document.querySelector("#send").addEventListener("click", async () => {
+            let data;
+            try {
+                data = JSON.parse(document.querySelector("#input").value);
+            } catch {
+                document.querySelector("#output").textContent = "invalid json";
+                return;
+            }
+            await httpPost("api/echo", data, (resp) => {
+                document.querySelector("#output").textContent = JSON.stringify(resp, null, 2);
+            });
+        });
+    </script>
+</body>
+</html>
