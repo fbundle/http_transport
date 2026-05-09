@@ -16,7 +16,9 @@ import (
 type WasmRouterGroup struct{ prefix string }
 
 // New returns a root WasmRouterGroup (no prefix).
-func New() *WasmRouterGroup { return &WasmRouterGroup{} }
+func NewWASM() *WasmRouterGroup { return &WasmRouterGroup{} }
+
+var New = NewWASM
 
 // Group returns a child WasmRouterGroup with the given path segment appended.
 func (r *WasmRouterGroup) Group(path string) *WasmRouterGroup {
@@ -40,4 +42,3 @@ func (r *WasmRouterGroup) POST(relativePath string, fn HandlerFunc) {
 		return string(b)
 	}))
 }
-
