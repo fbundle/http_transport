@@ -29,7 +29,7 @@ The JS transport (`docs/http_transport.js`) auto-detects which mode is active at
 
 - `http_transport.Router` — common interface (`POST(path, HandlerFunc)`)
 - `http_transport.NewGo(mux)` — stdlib `net/http` implementation
-- `http_transport.New()` — WASM implementation, registers handlers as `window` globals (`"api/echo"` → `window.api_echo`)
+- `http_transport.New()` — WASM implementation, registers handlers as `window` globals (`POST("api/echo")` → `window.POST$api$echo`)
 - `docs/http_transport.js` — JS client, checks `window[name]` first, falls back to `fetch`
 - Zero external dependencies
 - Go 1.18+ (generics), build tags: `!js` for server, `js && wasm` for browser
