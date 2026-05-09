@@ -3,7 +3,6 @@
 package http_transport
 
 import (
-	"encoding/json"
 	"io"
 	"net/http"
 )
@@ -35,6 +34,6 @@ func (r *GoRouterGroup) POST(relativePath string, fn HandlerFunc) {
 		status, resp := fn(body)
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(status)
-		json.NewEncoder(w).Encode(resp)
+		w.Write(resp)
 	})
 }

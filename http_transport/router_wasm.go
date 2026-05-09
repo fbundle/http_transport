@@ -3,7 +3,6 @@
 package http_transport
 
 import (
-	"encoding/json"
 	"strings"
 	"syscall/js"
 )
@@ -38,7 +37,6 @@ func (r *WasmRouterGroup) POST(relativePath string, fn HandlerFunc) {
 			body = []byte(args[0].String())
 		}
 		_, resp := fn(body)
-		b, _ := json.Marshal(resp)
-		return string(b)
+		return string(resp)
 	}))
 }

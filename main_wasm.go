@@ -12,12 +12,13 @@ import (
 func main() {
 	r := ht.New()
 
-	r.POST("api/echo", func(body []byte) (int, any) {
+	r.POST("api/echo", func(body []byte) (int, []byte) {
 		var req map[string]any
 		if err := json.Unmarshal(body, &req); err != nil {
 			return http.StatusBadRequest, nil
 		}
-		return http.StatusOK, req
+		resp, _ := json.Marshal(req)
+		return http.StatusOK, resp
 	})
 
 	select {}

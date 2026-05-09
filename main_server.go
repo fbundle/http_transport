@@ -17,12 +17,13 @@ func main() {
 	mux := http.NewServeMux()
 	r := ht.NewGo(mux)
 
-	r.POST("api/echo", func(body []byte) (int, any) {
+	r.POST("api/echo", func(body []byte) (int, []byte) {
 		var req map[string]any
 		if err := json.Unmarshal(body, &req); err != nil {
 			return http.StatusBadRequest, nil
 		}
-		return http.StatusOK, req
+		resp, _ := json.Marshal(req)
+		return http.StatusOK, resp
 	})
 
 	mux.Handle("/", http.FileServer(http.Dir("docs")))
