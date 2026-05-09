@@ -4,16 +4,16 @@
 
 **Remote mode**
 ```bash
-go run main_server.go
-# open http://localhost:8080
+go run main_server.go 3000
+# open http://localhost:3000
 ```
 
 **Local (WASM) mode**
 ```bash
 GOOS=js GOARCH=wasm go build -o docs/app.wasm main_wasm.go
 cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" docs/
-cd docs && python3 -m http.server 8080
-# open http://localhost:8080
+cd docs && python3 -m http.server 3000
+# open http://localhost:3000
 ```
 
 ## PURPOSE

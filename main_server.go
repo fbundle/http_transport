@@ -6,11 +6,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	ht "github.com/fbundle/http_transport/http_transport"
 )
 
 func main() {
+	port := os.Args[1]
+
 	mux := http.NewServeMux()
 	r := ht.NewGo(mux)
 
@@ -23,6 +26,6 @@ func main() {
 	})
 
 	mux.Handle("/", http.FileServer(http.Dir("docs")))
-	fmt.Println("Listening on http://localhost:8080")
-	http.ListenAndServe(":8080", mux)
+	fmt.Printf("Listening on http://localhost:%s\n", port)
+	http.ListenAndServe(":"+port, mux)
 }
